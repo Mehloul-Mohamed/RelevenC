@@ -1,0 +1,19 @@
+services:
+  frontier:
+    image: "redis:alpine"
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep pong"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+  app:
+    build: .
+    depends_on:
+      - frontier
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
