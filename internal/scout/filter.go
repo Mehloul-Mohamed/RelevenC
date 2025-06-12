@@ -88,7 +88,6 @@ func crawlable(ctx context.Context, link string, frontier *Frontier) (bool, stri
 			return true, ""
 		} else {
 			frontier.Push(ctx, link)
-			fmt.Println("delay")
 			return false, "Delay"
 		}
 	}
